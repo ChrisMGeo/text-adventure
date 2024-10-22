@@ -30,7 +30,7 @@ Generate an output as an array of elements aligning with the following type:
         mood: ${moodIds},
       }[]
     },
-    content: string, // contains only the dialogue contnt, and not anything about the speaker
+    content: string, // contains only the dialogue content, and not anything about the speaker, for example, "Hello, how are you?".
   }[] // You may return more than one dialogue per prompt
 }
 \`\`\``
