@@ -1,8 +1,10 @@
 import { generateStrictLlm, model } from "@/consts/langchain";
 import { CharacterData } from "@/types/character-data";
+import { DialogueSchema } from "@/types/dialogue-schema";
 import { MoodData } from "@/types/mood-data";
 import { SceneData } from "@/types/scene-data";
 import { generateSystemPrompt, summaryPrompt } from "@/util/prompts";
+import { randomChoice } from "@/util/random-choice";
 import { BaseMessage, HumanMessage } from "@langchain/core/messages";
 import { NextResponse } from "next/server";
 
@@ -13,6 +15,34 @@ export async function POST(req: Request) {
   // console.log({ messageHistory, allCharacterData, allMoodData, allSceneData });
   if (!messageHistory || !allCharacterData || !allMoodData || !allSceneData) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+  if (process.env.NODE_ENV === "development") {
+    const dialogues: DialogueSchema[] = [
+      {
+        mood: randomChoice(allMoodData).id,
+        scene: randomChoice(allSceneData).id,
+        speaker: {
+          type: "single",
+          character: randomChoice(allCharacterData).id,
+          mood: randomChoice(allMoodData).id
+        },
+        content: "Random Gibberish"
+      },
+      {
+        mood: randomChoice(allMoodData).id,
+        scene: randomChoice(allSceneData).id,
+        speaker: {
+          type: "single",
+          character: randomChoice(allCharacterData).id,
+          mood: randomChoice(allMoodData).id
+        },
+        content: "Random Gibberish 2"
+      },
+    ];
+    console.log("In development");
+    return NextResponse.json({
+      type: "unsummarized", dialogues
+    });
   }
   const structuredLlm = generateStrictLlm({ allCharacterData, allMoodData, allSceneData });
   const systemPrompt = generateSystemPrompt({ allCharacterData, allMoodData, allSceneData });
