@@ -53,9 +53,9 @@ export function useTextAdventure(
       const { dialogues }: { dialogues: DialogueSchema[] } = await response.json();
       const converted: BaseMessage[] = dialogues.map(d => new AIMessage(dialogueSchemaToMessage(d).content));
 
-      setMessages((_) => [...converted]);
+      setMessages([...converted]);
       const toAddLog: TextAdventureLog[] = dialogues.map((s) => ({ type: "dialogue", value: s }));
-      setLog((_) => [...toAddLog]);
+      setLog([...toAddLog]);
     } catch (error) {
       console.error("Failed to fetch model data:", error);
     } finally {
