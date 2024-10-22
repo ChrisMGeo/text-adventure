@@ -49,7 +49,7 @@ export async function POST(req: Request) {
   const systemMessage = { role: "system", content: systemPrompt };
   try {
     if (messageHistory.length >= summarizeLength) {
-      const lastHumanMessage = messageHistory[messageHistory.length - 1] as HumanMessage;
+      // const lastHumanMessage = messageHistory[messageHistory.length - 1] as HumanMessage;
       // console.log({ lastHumanMessage });
       const humanMessage = new HumanMessage(userInput);
 
