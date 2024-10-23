@@ -57,11 +57,30 @@ export default function Chat() {
     <div className="flex flex-col h-full">
       <div className="flex flex-row flex-grow">
         <div className="flex items-end">
-          <Image src={leftImages[0]?.url} alt="Character Image" width={500} height={250} />
+          {leftImages.map((img, i) => {
+            const scaleFactor = Math.sqrt(Math.sqrt(1 / (i + 1)));
+            return <Image key={i} src={img.url} alt="Character Image" width={500} height={250} style={{
+              transform: `scale(${(img.direction === 'left' ? -1 : 1) * scaleFactor}, ${scaleFactor})`,
+              marginLeft: `${-i * 250}px`,
+              zIndex: leftImages.length - i,
+              filter: `grayscale(${1 - scaleFactor})`
+            }} className="origin-bottom" />
+          }
+          )}
         </div>
         <div className="flex-grow bg-cover bg-center hidden md:flex" />
-        <div className="hidden md:flex md:items-end" >
-          <Image src={rightImages[0]?.url} alt="Character Image" width={500} height={250} />
+        <div className="hidden md:flex md:items-end flex-row-reverse" >
+          {rightImages.map((img, i) => {
+            const scaleFactor = Math.sqrt(Math.sqrt(1 / (i + 1)));
+            return <Image key={i} src={img.url} alt="Character Image" width={500} height={250} style={{
+              transform: `scale(${(img.direction === 'right' ? -1 : 1) * scaleFactor}, ${scaleFactor})`,
+              marginRight: `${-i * 250}px`,
+              zIndex: leftImages.length - i,
+              filter: `grayscale(${1 - scaleFactor})`
+
+            }} className="origin-bottom" />
+          }
+          )}
         </div>
       </div>
       <div className="p-4 rounded-xl border-solid border-4" style={{
