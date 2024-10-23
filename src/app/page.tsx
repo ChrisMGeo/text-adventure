@@ -20,7 +20,7 @@ export default function Chat() {
       submitMessage(input);
       setInput('');
     }
-    setLogIndex(logIndex + 1);
+    setLogIndex(logIndex => !isAtEnd ? logIndex : logIndex + 1);
   }
   const dialogueLogs = log.filter(l => l.type === 'dialogue');
   const [logIndex, setLogIndex] = useState(0);
