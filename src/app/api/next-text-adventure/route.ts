@@ -32,9 +32,33 @@ export async function POST(req: Request) {
         mood: randomChoice(allMoodData).id,
         scene: randomChoice(allSceneData).id,
         speaker: {
-          type: "single",
-          character: randomChoice(allCharacterData).id,
-          mood: randomChoice(allMoodData).id
+          type: "multiple",
+          value: [
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            },
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            },
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            },
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            },
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            },
+            {
+              character: randomChoice(allCharacterData).id,
+              mood: randomChoice(allMoodData).id
+            }
+          ],
         },
         content: "Random Gibberish 2"
       },
