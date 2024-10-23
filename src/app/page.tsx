@@ -46,7 +46,6 @@ export default function Chat() {
     }
   }, [logIndex, log]);
   const characterImages = speakers.map(({ character, mood }) => getCharacterImage(defaultCharacters, character, mood)).filter(c => c !== undefined);
-  console.log(characterImages);
   const leftImages = characterImages.filter((_, i) => i % 2 === 0);
   const rightImages = characterImages.filter((_, i) => i % 2 === 1);
   const disableInput = loading || !isAtEnd;
