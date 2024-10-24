@@ -46,3 +46,15 @@ export const zDialogueSchema = z.object({
 
 export const zDialogueSchemaArray = z.array(zDialogueSchema);
 export const zDialogueSchemaArrayStrict = (params: { moods: string[], scenes: string[], characters: string[] }) => z.array(zDialogueSchemaStrict(params));
+
+export const zToAddSkeleton = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string()
+});
+
+export const zToAddSchema = z.object({
+  characters: z.array(zToAddSkeleton).optional(),
+  scenes: z.array(zToAddSkeleton).optional(),
+  moods: z.array(zToAddSkeleton).optional(),
+}).optional();

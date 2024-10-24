@@ -31,7 +31,24 @@ Generate an output as an array of elements aligning with the following type:
       }[]
     },
     content: string, // contains only the dialogue content, and not anything about the speaker, for example, "Hello, how are you?".
-  }[] // You may return more than one dialogue per prompt
+  }[], // You may return more than one dialogue per prompt
+  toAdd?: { // When the narrator mentions a new character, scene or mood use this to describe what they are. Make sure to not use them in the dialogue yet.
+    characters?: {
+      id: string,
+      name: string,
+      description?: string,
+    }[],
+    scenes?: {
+      id: string,
+      name: string,
+      description?: string,
+    }[],
+    moods?: {
+      id: string,
+      name: string,
+      description?: string,
+    }[],
+  }
 }
 \`\`\``
 }

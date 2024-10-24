@@ -78,11 +78,11 @@ export async function POST(req: Request) {
       const humanMessage = new HumanMessage(userInput);
 
       const summaryMessage = await model.invoke([...messageHistory, new HumanMessage(summaryPrompt)]);
-      const { dialogues } = await structuredLlm.invoke([systemMessage, summaryMessage, humanMessage]);
-      return NextResponse.json({ type: "summarized", dialogues, summarizedMessage: summaryMessage.content });
+      const { dialogues, toAdd } = await structuredLlm.invoke([systemMessage, summaryMessage, humanMessage]);
+      return NextResponse.json({ dialogues, summarizedMessage: summaryMessage, toAdd });
     } else {
-      const { dialogues } = await structuredLlm.invoke([systemMessage, ...messageHistory]);
-      return NextResponse.json({ type: "unsummarized", dialogues });
+      const { dialogues, toAdd } = await structuredLlm.invoke([systemMessage, ...messageHistory]);
+      return NextResponse.json({ dialogues, toAdd });
     }
   } catch (error) {
     // console.log(error);
