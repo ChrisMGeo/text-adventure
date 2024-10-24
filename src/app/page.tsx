@@ -43,6 +43,8 @@ export default function Chat() {
       setContent(content);
       const bgRes = getSceneImage(defaultScenes, scene, mood);
       if (bgRes) setBg(bgRes);
+    } else if (dialogueLogs.length > 0) {
+      setLogIndex(logIndex => logIndex - 1);
     }
   }, [logIndex, log]);
   const characterImages = speakers.map(({ character, mood }) => getCharacterImage(defaultCharacters, character, mood)).filter(c => c !== undefined);
